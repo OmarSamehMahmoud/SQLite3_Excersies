@@ -6,13 +6,15 @@ cursor = con.cursor()
 
 cursor.execute("CREATE TABLE movies(Title TEXT, Year INTEGER)")
 
-cursor.execute("INSERT INTO movies(Title,Year) VALUES ('Spider',2000)")
+moviess = [('spider',2000), ('bee',2003)]
 
-data = cursor.execute ("SELECT Title,Year FROM movies ORDER BY Year DESC LIMIT 1")
+cursor.executemany("INSERT INTO movies  VALUES (?,?)",moviess)
+
+data = cursor.execute ("SELECT Title,Year FROM movies WHERE Year = 2000 AND Title = 'spider'")
+
 
 for row in data:
     print(row[0])
-    
     
 con.commit()
 
